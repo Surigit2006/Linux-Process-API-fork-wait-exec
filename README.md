@@ -28,7 +28,26 @@ Test the C Program for the desired output.
 
 
 
+```
+#include <stdio.h>
+#include <sys/types.h>
+#include <unistd.h>
+int main(void)
+{	//variable to store calling function's process id
+	pid_t process_id;
+	//variable to store parent function's process id
+	pid_t p_process_id;
+	//getpid() - will return process id of calling function
+	process_id = getpid();
+	//getppid() - will return process id of parent function
+	p_process_id = getppid();
+	//printing the process ids
 
+//printing the process ids
+	printf("The process id: %d\n",process_id);
+	printf("The process id of parent function: %d\n",p_process_id);
+	return 0; }
+```
 
 
 
@@ -38,6 +57,8 @@ Test the C Program for the desired output.
 
 
 ##OUTPUT
+<img width="1920" height="1029" alt="image" src="https://github.com/user-attachments/assets/04fac910-873c-4c6c-ac64-986a4868a841" />
+
 
 
 
@@ -53,7 +74,48 @@ Test the C Program for the desired output.
 
 
 
+```
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <unistd.h>
 
+int main() {
+    int status;
+    
+    printf("Running ps with execl\n");
+    if (fork() == 0) {
+        execl("ps", "ps", "-f", NULL);
+        perror("execl failed");
+        exit(1);
+    }
+    wait(&status);
+    
+    if (WIFEXITED(status)) {
+        printf("Child exited with status: %d\n", WEXITSTATUS(status));
+    } else {
+        printf("Child did not exit successfully\n");
+    }
+    
+    printf("Running ps with execlp (without full path)\n");
+    if (fork() == 0) {
+        execlp("ps", "ps", "-f", NULL);
+        perror("execlp failed");
+        exit(1);
+    }
+    wait(&status);
+    
+    if (WIFEXITED(status)) {
+        printf("Child exited for execlp with status: %d\n", WEXITSTATUS(status));
+    } else {
+        printf("Child did not exit successfully\n");
+    }
+    
+    printf("Done.\n");
+    return 0;
+}
+```
 
 
 
@@ -77,6 +139,7 @@ Test the C Program for the desired output.
 
 
 
+<img width="1920" height="1029" alt="image" src="https://github.com/user-attachments/assets/4933a764-1376-4fd3-ad32-106d5f71fc9f" />
 
 
 
