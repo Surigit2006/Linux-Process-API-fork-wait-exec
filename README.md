@@ -57,8 +57,8 @@ int main(void)
 
 
 ##OUTPUT
+<img width="1920" height="1057" alt="image" src="https://github.com/user-attachments/assets/4d641868-a3bc-4974-ad35-c1df38fc5836" />
 
-<img width="1920" height="1029" alt="image" src="https://github.com/user-attachments/assets/cf85f742-eab5-4a72-b09e-3a723155b13a" />
 
 
 
